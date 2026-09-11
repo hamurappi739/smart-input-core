@@ -1,0 +1,55 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:SmartInput.App.ViewModels"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             d:DesignWidth="900"
+             d:DesignHeight="700"
+             x:Class="SmartInput.App.Views.CorrectionsView"
+             x:DataType="vm:CorrectionsViewModel">
+  <ScrollViewer>
+    <StackPanel Spacing="24" MaxWidth="960">
+      <StackPanel Spacing="8">
+        <TextBlock Text="Параметры исправлений"
+                   Classes="page-title" />
+        <TextBlock Text="Здесь собраны редкие настройки. Основные переключатели находятся на главной странице."
+                   Classes="page-subtitle" />
+      </StackPanel>
+
+      <Border Classes="card hero">
+        <StackPanel Spacing="8">
+          <TextBlock Text="Как работает автокоррекция"
+                     Classes="card-title" />
+          <TextBlock Text="Smart Input исправляет только очевидные случаи после границы слова. Если кандидат сомнительный, текст остаётся без изменений."
+                     Classes="muted"
+                     TextWrapping="Wrap" />
+          <TextBlock Text="Для ручной отмены последнего исправления дважды нажмите Shift."
+                     Classes="muted"
+                     FontWeight="SemiBold"
+                     TextWrapping="Wrap" />
+        </StackPanel>
+      </Border>
+
+      <Expander Header="Дополнительные настройки"
+                IsExpanded="False">
+        <StackPanel Spacing="16" Margin="0,12,0,0">
+          <Border Classes="card" Opacity="0.92">
+            <StackPanel Spacing="8">
+              <TextBlock Text="Расширенная проверка слов"
+                         Classes="card-title" />
+              <TextBlock Text="Дополнительные локальные словари и формы слов. Включайте, если базовой проверки недостаточно; при сомнении слово останется без изменений."
+                         Classes="muted"
+                         TextWrapping="Wrap" />
+              <ToggleSwitch IsChecked="{Binding ExternalSpellingEngineEnabled}"
+                            OnContent="Вкл."
+                            OffContent="Выкл."
+                            AutomationProperties.Name="Включить расширенную проверку слов" />
+            </StackPanel>
+          </Border>
+
+        </StackPanel>
+      </Expander>
+    </StackPanel>
+  </ScrollViewer>
+</UserControl>

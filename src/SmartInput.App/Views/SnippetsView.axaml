@@ -1,0 +1,165 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:SmartInput.App.ViewModels"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             d:DesignWidth="960"
+             d:DesignHeight="720"
+             x:Class="SmartInput.App.Views.SnippetsView"
+             x:DataType="vm:SnippetsViewModel">
+  <ScrollViewer>
+    <StackPanel Spacing="24" MaxWidth="980">
+      <StackPanel Spacing="8">
+        <TextBlock Text="Сокращения и шаблоны"
+                   Classes="page-title" />
+        <TextBlock Text="{Binding PageNote}"
+                   Classes="page-subtitle" />
+      </StackPanel>
+
+      <Border Classes="card hero">
+        <StackPanel Spacing="8">
+          <TextBlock Text="Автоматическая подстановка"
+                     Classes="card-title" />
+          <TextBlock Text="Напишите сокращение, например /адрес, поставьте пробел — Smart Input вставит сохранённый текст."
+                     Classes="muted" />
+          <ToggleSwitch IsChecked="{Binding SnippetsEnabled}"
+                        OnContent="Вкл."
+                        OffContent="Выкл."
+                        AutomationProperties.Name="Включить автоматическую подстановку" />
+        </StackPanel>
+      </Border>
+
+      <Border Classes="card">
+        <StackPanel Spacing="12">
+          <DockPanel>
+            <Button DockPanel.Dock="Right"
+                    Content="Новый шаблон"
+                    Command="{Binding NewSnippetCommand}"
+                    Margin="12,0,0,0" />
+          <TextBlock Text="Сохранённые шаблоны"
+                       Classes="card-title"
+                       VerticalAlignment="Center" />
+          </DockPanel>
+          <TextBlock Text="{Binding SnippetsCountLabel}"
+                     Classes="muted" />
+          <TextBlock Text="{Binding StatusMessage}"
+                     Opacity="0.75"
+                     TextWrapping="Wrap" />
+          <TextBlock Text="Список пуст. Нажмите «Новый шаблон», чтобы создать первую подстановку."
+                     Classes="empty-state"
+                     IsVisible="{Binding !HasSnippets}" />
+          <ListBox ItemsSource="{Binding Snippets}"
+                   SelectedItem="{Binding SelectedSnippet}"
+                   MinHeight="160"
+                   MaxHeight="260"
+                   IsVisible="{Binding HasSnippets}">
+            <ListBox.ItemTemplate>
+              <DataTemplate x:DataType="vm:SnippetListItemViewModel">
+                <Grid ColumnDefinitions="*,Auto,Auto,Auto" Margin="0,4">
+                  <StackPanel Grid.Column="0" Spacing="2">
+                    <TextBlock Text="{Binding Trigger}"
+                               FontWeight="SemiBold" />
+                    <TextBlock Text="{Binding ReplacementPreview}"
+                               Opacity="0.7"
+                               FontSize="12"
+                               TextWrapping="NoWrap" />
+                  </StackPanel>
+                  <TextBlock Grid.Column="1"
+                             Text="{Binding LanguageLabel}"
+                             Margin="12,0"
+                             Opacity="0.7"
+                             VerticalAlignment="Center" />
+                  <TextBlock Grid.Column="2"
+                             Text="{Binding EnabledLabel}"
+                             Margin="12,0"
+                             Opacity="0.7"
+                             VerticalAlignment="Center" />
+                  <Button Grid.Column="3"
+                          Content="{Binding ToggleLabel}"
+                          Command="{Binding $parent[UserControl].DataContext.ToggleEnabledCommand}"
+                          CommandParameter="{Binding}"
+                          VerticalAlignment="Center" />
+                </Grid>
+              </DataTemplate>
+            </ListBox.ItemTemplate>
+          </ListBox>
+        </StackPanel>
+      </Border>
+
+      <Border Classes="card">
+        <StackPanel Spacing="12">
+          <TextBlock Text="{Binding EditorTitle}"
+                     Classes="card-title" />
+          <TextBlock Text="Сокращение — это короткая команда без пробелов. После пробела команда заменится на сохранённый текст."
+                     Classes="muted" />
+
+          <TextBlock Text="Сокращение" Classes="field-label" />
+          <TextBox Text="{Binding TriggerText}"
+                   Watermark="например: /адрес"
+                   AutomationProperties.Name="Сокращение шаблона" />
+
+          <TextBlock Text="Что вставить" Classes="field-label" />
+          <TextBox Text="{Binding ReplacementText}"
+                   AcceptsReturn="True"
+                   TextWrapping="Wrap"
+                   MinHeight="96"
+                   Watermark="Текст, который будет вставлен…"
+                   AutomationProperties.Name="Текст подстановки" />
+
+          <TextBlock Text="Язык команды" Classes="field-label" />
+          <ComboBox ItemsSource="{Binding LanguageOptions}"
+                    SelectedItem="{Binding SelectedLanguageOption}"
+                    HorizontalAlignment="Left"
+                    MinWidth="180"
+                    AutomationProperties.Name="Язык команды" />
+
+          <StackPanel Orientation="Horizontal" Spacing="24">
+            <CheckBox IsChecked="{Binding CaseSensitive}"
+                      Content="Учитывать регистр" />
+            <CheckBox IsChecked="{Binding IsEnabled}"
+                      Content="Шаблон включён" />
+          </StackPanel>
+
+          <Expander Header="Ограничить шаблон отдельными приложениями (необязательно)"
+                    IsExpanded="False">
+            <StackPanel Spacing="12" Margin="0,12,0,0">
+              <TextBlock Text="Оставьте оба поля пустыми — шаблон работает везде. Имена процессов указывайте без .exe, через запятую."
+                         Classes="muted"
+                         TextWrapping="Wrap" />
+              <TextBlock Text="Работает только в этих приложениях"
+                         Classes="field-label" />
+              <TextBox Text="{Binding EnabledApplicationsText}"
+                       Watermark="например: chrome, notepad"
+                       AutomationProperties.Name="Список разрешённых приложений" />
+              <TextBlock Text="Не работает в этих приложениях"
+                         Classes="field-label" />
+              <TextBox Text="{Binding DisabledApplicationsText}"
+                       Watermark="например: terminal"
+                       AutomationProperties.Name="Список исключённых приложений" />
+            </StackPanel>
+          </Expander>
+
+          <TextBlock Text="{Binding ValidationMessage}"
+                     Foreground="{DynamicResource AppDangerBrush}"
+                     TextWrapping="Wrap"
+                     IsVisible="{Binding HasValidationErrors}" />
+
+          <StackPanel Orientation="Horizontal" Spacing="8">
+            <Button Content="Сохранить"
+                    Classes="primary"
+                    Command="{Binding SaveSnippetCommand}"
+                    IsEnabled="{Binding !IsBusy}" />
+            <Button Content="Удалить выбранный"
+                    Classes="danger"
+                    Command="{Binding DeleteSnippetCommand}"
+                    IsEnabled="{Binding !IsBusy}" />
+            <Button Content="Очистить форму"
+                    Command="{Binding NewSnippetCommand}"
+                    IsEnabled="{Binding !IsBusy}" />
+          </StackPanel>
+        </StackPanel>
+      </Border>
+    </StackPanel>
+  </ScrollViewer>
+</UserControl>

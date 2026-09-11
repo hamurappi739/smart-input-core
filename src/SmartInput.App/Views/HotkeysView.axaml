@@ -1,0 +1,62 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:SmartInput.App.ViewModels"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             d:DesignWidth="900"
+             d:DesignHeight="700"
+             x:Class="SmartInput.App.Views.HotkeysView"
+             x:DataType="vm:HotkeysViewModel">
+  <ScrollViewer>
+    <StackPanel Spacing="24" MaxWidth="960">
+      <StackPanel Spacing="8">
+        <TextBlock Text="Основные горячие клавиши"
+                   Classes="page-title" />
+        <TextBlock Text="Для обычной работы достаточно двух быстрых действий. Остальные сочетания можно не настраивать."
+                   Classes="page-subtitle" />
+      </StackPanel>
+
+      <Border Classes="card hero">
+        <StackPanel Spacing="12">
+          <TextBlock Text="Включить / выключить автоисправление раскладки"
+                     Classes="card-title" />
+          <TextBlock Text="Одно нажатие включает или выключает только исправление неверной раскладки. По умолчанию — Ctrl+F12."
+                     Classes="muted" />
+          <TextBox Text="{Binding AutomaticLayoutHotkeyText}"
+                   Watermark="Например: Ctrl+F12; оставьте пустым, чтобы отключить" />
+          <StackPanel Orientation="Horizontal" Spacing="8">
+            <Button Content="Сохранить"
+                    Classes="primary"
+                    Command="{Binding ApplyAutomaticLayoutHotkeyCommand}"
+                    IsEnabled="{Binding !IsApplyingAutomaticLayoutHotkey}" />
+            <Button Content="Сбросить"
+                    Command="{Binding ResetAutomaticLayoutHotkeyCommand}"
+                    IsEnabled="{Binding !IsApplyingAutomaticLayoutHotkey}" />
+            <Button Content="Обновить статус"
+                    Command="{Binding RefreshRegistrationStatusCommand}" />
+          </StackPanel>
+          <TextBlock Text="{Binding AutomaticLayoutHotkeyStatus}"
+                     FontFamily="Consolas,Courier New,monospace"
+                     FontSize="12"
+                     TextWrapping="Wrap" />
+          <TextBlock Text="{Binding AutomaticLayoutHotkeyValidationMessage}"
+                     Opacity="0.8"
+                     TextWrapping="Wrap" />
+        </StackPanel>
+      </Border>
+
+      <Border Classes="card">
+        <StackPanel Spacing="12">
+          <TextBlock Text="Отменить последнее исправление"
+                     Classes="card-title" />
+          <TextBlock Text="Нажмите Shift, отпустите и сразу нажмите Shift ещё раз. Последняя автоматическая замена вернётся ровно один раз. Настраивать это сочетание не нужно."
+                     Classes="muted" />
+          <TextBlock Text="Быстрая команда: Shift → Shift"
+                     FontWeight="SemiBold" />
+        </StackPanel>
+      </Border>
+
+    </StackPanel>
+  </ScrollViewer>
+</UserControl>

@@ -1,0 +1,45 @@
+# Build output and IDE state
+**/bin/
+**/obj/
+.vs/
+.idea/
+.vscode/
+
+# Test output, crash dumps and local profiling artifacts
+**/TestResults/
+**/test-results/
+*.dmp
+*.trx
+*.log
+
+# Generated/released bundles and historical review snapshots
+/artifacts/
+/INDEPENDENT_AI_REVIEW_PACKET/
+/INDEPENDENT_AI_REVIEW_PACKET_CLEAN/
+/INDEPENDENT_AI_REVIEW_PACKET_CLEAN2/
+/INDEPENDENT_AI_REVIEW_PACKET*.zip
+
+# Local scratch files and scripts
+_*.csx
+tmp_*
+*.tmp
+tools/__pycache__/
+
+# OS/user-specific files
+*.lnk
+.DS_Store
+Thumbs.db
+
+# Credentials and local configuration
+.env
+.env.*
+*.user
+*.suo
+appsettings.Local.json
+settings.local.json
+
+# Runtime user data (never publish personal dictionaries/settings)
+user-dictionary.json
+snippets.json
+settings.json
+**/AppData/

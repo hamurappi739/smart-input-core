@@ -1,0 +1,132 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:SmartInput.App.ViewModels"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             d:DesignWidth="960"
+             d:DesignHeight="720"
+             x:Class="SmartInput.App.Views.MyDictionaryView"
+             x:DataType="vm:MyDictionaryViewModel">
+  <ScrollViewer>
+    <StackPanel Spacing="24" MaxWidth="980">
+      <StackPanel Spacing="8">
+        <TextBlock Text="Мой словарь"
+                   Classes="page-title" />
+        <TextBlock Text="{Binding PageNote}"
+                   Classes="page-subtitle" />
+      </StackPanel>
+
+      <Border Classes="card hero">
+        <StackPanel Spacing="12">
+          <TextBlock Text="Добавить слово или название"
+                     Classes="card-title" />
+          <TextBlock Text="Добавьте термин, имя или бренд, который нужно сохранять без изменений. Для обычного слова снимите флажок ниже."
+                     Classes="muted"
+                     TextWrapping="Wrap" />
+          <TextBox Watermark="Слово или название"
+                   Text="{Binding NewWord}"
+                   AutomationProperties.Name="Новое слово или название" />
+          <TextBlock Text="Язык записи"
+                     Classes="field-label" />
+          <ComboBox ItemsSource="{Binding LanguageOptions}"
+                    SelectedItem="{Binding SelectedLanguageOption}"
+                    HorizontalAlignment="Stretch"
+                    AutomationProperties.Name="Язык записи" />
+          <CheckBox Content="Никогда не исправлять это слово"
+                    IsChecked="{Binding NeverAutocorrect}"
+                    AutomationProperties.Name="Никогда не исправлять это слово" />
+          <Button Content="Добавить"
+                  Command="{Binding AddWordCommand}"
+                  IsEnabled="{Binding !IsBusy}"
+                  Classes="primary"
+                  HorizontalAlignment="Left" />
+          <TextBlock Text="{Binding ValidationMessage}"
+                     Foreground="{DynamicResource AppDangerBrush}"
+                     IsVisible="{Binding HasValidationErrors}" />
+        </StackPanel>
+      </Border>
+
+      <Border Classes="card">
+        <StackPanel Spacing="12">
+          <TextBlock Text="Сохранённые слова"
+                     Classes="card-title" />
+          <TextBlock Text="{Binding WordsCountLabel}"
+                     Classes="muted" />
+          <TextBlock Text="Добавленные записи помогают не трогать ваши названия и термины."
+                     Classes="muted"
+                     TextWrapping="Wrap" />
+          <TextBlock Text="{Binding StatusMessage}"
+                     Opacity="0.75"
+                     TextWrapping="Wrap" />
+          <TextBlock Text="Список пуст. Добавьте первую запись выше."
+                     Classes="empty-state"
+                     IsVisible="{Binding !HasWords}" />
+          <ListBox ItemsSource="{Binding Words}"
+                   MinHeight="120"
+                   MaxHeight="240"
+                   IsVisible="{Binding HasWords}">
+            <ListBox.ItemTemplate>
+              <DataTemplate x:DataType="vm:DictionaryWordItemViewModel">
+                <Grid ColumnDefinitions="*,Auto,Auto" Margin="0,4">
+                  <StackPanel Grid.Column="0" Spacing="2">
+                    <TextBlock Text="{Binding Word}"
+                               FontWeight="SemiBold" />
+                    <TextBlock Text="{Binding NeverAutocorrectLabel}"
+                               Opacity="0.7"
+                               FontSize="12"
+                               IsVisible="{Binding NeverAutocorrect}" />
+                  </StackPanel>
+                  <TextBlock Grid.Column="1"
+                             Text="{Binding LanguageLabel}"
+                             Margin="12,0"
+                             Opacity="0.7"
+                             VerticalAlignment="Center" />
+                  <Button Grid.Column="2"
+                          Content="Удалить"
+                          Command="{Binding $parent[UserControl].DataContext.RemoveWordCommand}"
+                          CommandParameter="{Binding}"
+                          VerticalAlignment="Center" />
+                </Grid>
+              </DataTemplate>
+            </ListBox.ItemTemplate>
+          </ListBox>
+        </StackPanel>
+      </Border>
+
+      <Border Classes="card">
+        <StackPanel Spacing="12">
+          <TextBlock Text="Отменённые исправления"
+                     Classes="card-title" />
+          <TextBlock Text="Если вы несколько раз отменили замену, она попадает сюда и больше не применяется автоматически."
+                     Classes="muted" />
+          <TextBlock Text="{Binding RejectedCorrectionsCountLabel}"
+                     Classes="muted" />
+          <TextBlock Text="Здесь пока пусто."
+                     Classes="empty-state"
+                     IsVisible="{Binding !HasRejectedCorrections}" />
+          <ListBox ItemsSource="{Binding RejectedCorrections}"
+                   MinHeight="120"
+                   MaxHeight="240"
+                   IsVisible="{Binding HasRejectedCorrections}">
+            <ListBox.ItemTemplate>
+              <DataTemplate x:DataType="vm:RejectedCorrectionItemViewModel">
+                <Grid ColumnDefinitions="*,Auto" Margin="0,4">
+                  <TextBlock Grid.Column="0"
+                             Text="{Binding Summary}"
+                             TextWrapping="Wrap"
+                             VerticalAlignment="Center" />
+                  <Button Grid.Column="1"
+                          Content="Снова разрешить"
+                          Command="{Binding $parent[UserControl].DataContext.AllowAgainCommand}"
+                          CommandParameter="{Binding}"
+                          VerticalAlignment="Center" />
+                </Grid>
+              </DataTemplate>
+            </ListBox.ItemTemplate>
+          </ListBox>
+        </StackPanel>
+      </Border>
+    </StackPanel>
+  </ScrollViewer>
+</UserControl>

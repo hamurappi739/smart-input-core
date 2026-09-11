@@ -1,0 +1,20 @@
+{
+  "schema": 1,
+  "modelFormat": "SIL1",
+  "modelFile": "early-layout-v1.bin",
+  "sha256": "16841FE4A755523B41D5CC4DE1C5703B3B1F3FEEEC734E3DFE486DB44DBC4160",
+  "binaryBytes": 2901872,
+  "evaluationOptions": {
+    "minimumLength": 4,
+    "minimumMargin": 1.5,
+    "minimumTargetContinuations": 2
+  },
+  "maximumPrefixLength": 10,
+  "optionsEmbeddedInBinary": false,
+  "source": "StarterAutocorrectLexicon; immutable public embedded vocabulary only",
+  "split": "lowercase-word SHA256 byte 0 modulo 10; train <8, validation =8, test =9",
+  "weighting": "squared lexicon rank score, not raw corpus frequency",
+  "liveReplacement": false,
+  "liveReady": false,
+  "reportFile": "results-v1-final.json"
+}

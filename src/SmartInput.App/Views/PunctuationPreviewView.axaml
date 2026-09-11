@@ -1,0 +1,68 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:SmartInput.App.ViewModels"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             d:DesignWidth="900"
+             d:DesignHeight="700"
+             x:Class="SmartInput.App.Views.PunctuationPreviewView"
+             x:DataType="vm:PunctuationPreviewViewModel">
+  <ScrollViewer>
+    <StackPanel Spacing="24" MaxWidth="960">
+      <StackPanel Spacing="8">
+        <TextBlock Text="Пунктуация"
+                   Classes="page-title" />
+        <TextBlock Text="Локальная проверка расставляет только знаки препинания. Ничего не отправляется в интернет и не меняется в других приложениях."
+                   Classes="page-subtitle"
+                   TextWrapping="Wrap" />
+      </StackPanel>
+
+      <Border Classes="card hero">
+        <StackPanel Spacing="12">
+          <TextBlock Text="1. Введите фразу без знаков"
+                     Classes="card-title" />
+          <TextBox Text="{Binding SourceText, Mode=TwoWay}"
+                   Watermark="Например: как у тебя дела"
+                   AcceptsReturn="True"
+                   TextWrapping="Wrap"
+                   MinHeight="120"
+                   AutomationProperties.Name="Исходный текст для проверки пунктуации" />
+          <TextBlock Text="Ссылки, адреса, код, числа и смешанный алфавит автоматически пропускаются."
+                     Classes="muted"
+                     TextWrapping="Wrap" />
+        </StackPanel>
+      </Border>
+
+      <Border Classes="card">
+        <StackPanel Spacing="12">
+          <TextBlock Text="2. Проверьте предложение"
+                     Classes="card-title" />
+          <TextBlock Text="{Binding Status}"
+                     TextWrapping="Wrap"
+                     AutomationProperties.Name="Статус проверки пунктуации" />
+          <TextBox Text="{Binding PreviewText}"
+                   IsReadOnly="True"
+                   AcceptsReturn="True"
+                   TextWrapping="Wrap"
+                   MinHeight="120"
+                   AutomationProperties.Name="Предпросмотр пунктуации" />
+          <StackPanel Orientation="Horizontal" Spacing="8">
+            <Button Content="Проверить пунктуацию"
+                    Command="{Binding AnalyzeCommand}" />
+            <Button Content="Применить здесь"
+                    IsEnabled="{Binding CanApply}"
+                    Command="{Binding ApplyPreviewCommand}" />
+            <Button Content="Отменить"
+                    Command="{Binding UndoPreviewCommand}" />
+            <Button Content="Очистить"
+                    Command="{Binding ClearCommand}" />
+          </StackPanel>
+          <TextBlock Text="«Применить здесь» меняет только текст в этом окне. Для внешнего ввода будет отдельное действие с существующим Undo."
+                     Classes="muted"
+                     TextWrapping="Wrap" />
+        </StackPanel>
+      </Border>
+    </StackPanel>
+  </ScrollViewer>
+</UserControl>

@@ -1,0 +1,39 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SmartInput.Core\SmartInput.Core.csproj" />
+    <ProjectReference Include="..\SmartInput.Infrastructure\SmartInput.Infrastructure.csproj" />
+    <ProjectReference Include="..\SmartInput.Platform.Abstractions\SmartInput.Platform.Abstractions.csproj" />
+    <ProjectReference Include="..\SmartInput.Platform.Windows\SmartInput.Platform.Windows.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="10.0.11" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <InternalsVisibleTo Include="SmartInput.App.Tests" />
+  </ItemGroup>
+
+  <!-- These services deliberately do not reference Avalonia. They can be
+       reused by the resident hook/tray host and by the desktop UI process. -->
+  <ItemGroup>
+    <Compile Include="..\SmartInput.App\Services\IInputDiagnosticCoordinator.cs" Link="Services\IInputDiagnosticCoordinator.cs" />
+    <Compile Include="..\SmartInput.App\Services\InputDiagnosticCoordinator.cs" Link="Services\InputDiagnosticCoordinator.cs" />
+    <Compile Include="..\SmartInput.App\Services\LiveLayoutCorrectionCoordinator.cs" Link="Services\LiveLayoutCorrectionCoordinator.cs" />
+    <Compile Include="..\SmartInput.App\Services\CorrectionNotificationCoordinator.cs" Link="Services\CorrectionNotificationCoordinator.cs" />
+    <Compile Include="..\SmartInput.App\Services\LivePredictionCoordinator.cs" Link="Services\LivePredictionCoordinator.cs" />
+    <Compile Include="..\SmartInput.App\Services\LivePredictionOverlayCoordinator.cs" Link="Services\LivePredictionOverlayCoordinator.cs" />
+    <Compile Include="..\SmartInput.App\Services\LivePredictionTabAcceptanceCoordinator.cs" Link="Services\LivePredictionTabAcceptanceCoordinator.cs" />
+    <Compile Include="..\SmartInput.App\Services\LivePredictionEscDismissalCoordinator.cs" Link="Services\LivePredictionEscDismissalCoordinator.cs" />
+    <Compile Include="..\SmartInput.App\Services\AutomaticLayoutHotkeyCoordinator.cs" Link="Services\AutomaticLayoutHotkeyCoordinator.cs" />
+    <Compile Include="..\SmartInput.App\Services\UndoHotkeyCoordinator.cs" Link="Services\UndoHotkeyCoordinator.cs" />
+    <Compile Include="..\SmartInput.App\Services\DoubleShiftUndoCoordinator.cs" Link="Services\DoubleShiftUndoCoordinator.cs" />
+    <Compile Include="..\SmartInput.App\Services\ManualCorrectionHotkeyCoordinator.cs" Link="Services\ManualCorrectionHotkeyCoordinator.cs" />
+  </ItemGroup>
+</Project>

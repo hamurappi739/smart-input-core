@@ -1,0 +1,276 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:SmartInput.App.ViewModels"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             d:DesignWidth="900"
+             d:DesignHeight="700"
+             x:Class="SmartInput.App.Views.AdvancedView"
+             x:DataType="vm:AdvancedViewModel">
+  <ScrollViewer>
+    <StackPanel Spacing="16" MaxWidth="960">
+      <StackPanel Spacing="8">
+        <TextBlock Text="Расширенная диагностика"
+                   FontSize="28"
+                   FontWeight="SemiBold" />
+        <TextBlock Text="Наблюдение за вводом, демонстрация замены текста и ручное преобразование раскладки."
+                   Opacity="0.75"
+                   TextWrapping="Wrap" />
+      </StackPanel>
+
+      <Border Classes="card">
+        <StackPanel Spacing="12">
+          <TextBlock Text="Rust-движок: shadow + безопасный гибрид"
+                     FontWeight="SemiBold" />
+          <TextBlock Text="Rust только предлагает кандидат. Перед заменой его проверяет SmartInput Core; прямого доступа к SendInput, Undo и политике у Rust нет. Здесь видны только итоговые счётчики, причины и задержка. Введённые слова и варианты замены не сохраняются и не показываются."
+                     Opacity="0.75"
+                     TextWrapping="Wrap" />
+          <TextBlock Text="{Binding RustShadowAuditStatus}"
+                     TextWrapping="Wrap"
+                     FontFamily="Consolas,Courier New,monospace"
+                     FontSize="12" />
+          <Button Content="Обновить статус сравнения"
+                  Command="{Binding RefreshRustShadowAuditStatusCommand}"
+                  HorizontalAlignment="Left" />
+        </StackPanel>
+      </Border>
+
+      <Border Classes="card">
+        <StackPanel Spacing="12">
+          <TextBlock Text="Диагностика производительности (только числа)"
+                     FontWeight="SemiBold" />
+          <TextBlock Text="Скользящие показатели в памяти для обработчика клавиш, очереди, вычислений, замен, оверлея и горячих клавиш. Только счётчики, длительности, глубина очереди и результаты — без введённого текста, подсказок, заголовков окон и имён процессов."
+                     Opacity="0.75"
+                     TextWrapping="Wrap" />
+          <TextBlock Text="{Binding PerformanceMetricsSummary}"
+                     TextWrapping="Wrap"
+                     FontFamily="Consolas,Courier New,monospace"
+                     FontSize="12" />
+          <StackPanel Orientation="Horizontal" Spacing="8">
+            <Button Content="Обновить показатели"
+                    Command="{Binding RefreshPerformanceMetricsCommand}"
+                    HorizontalAlignment="Left" />
+            <Button Content="Сбросить показатели"
+                    Command="{Binding ResetPerformanceMetricsCommand}"
+                    HorizontalAlignment="Left" />
+          </StackPanel>
+          <CheckBox Content="Отладочное журналирование (только длительности и статусы, без текста)"
+                    IsChecked="{Binding IsPerformanceDebugLoggingEnabled}" />
+        </StackPanel>
+      </Border>
+
+      <Border Classes="card">
+        <StackPanel Spacing="12">
+          <TextBlock Text="Автоматическое определение неверной раскладки"
+                     FontWeight="SemiBold" />
+          <TextBlock Text="Осторожное исправление только на границе слова. Только счётчики и статус — текст слова никогда не записывается и не сохраняется."
+                     Opacity="0.75"
+                     TextWrapping="Wrap" />
+          <TextBlock Text="{Binding LiveLayoutCorrectionStatus}"
+                     TextWrapping="Wrap"
+                     FontFamily="Consolas,Courier New,monospace"
+                     FontSize="12" />
+          <Button Content="Обновить статус исправления"
+                  Command="{Binding RefreshLiveLayoutCorrectionStatusCommand}"
+                  HorizontalAlignment="Left" />
+          <TextBlock Text="Статус резидентного ввода (вне окна настроек)"
+                     FontWeight="SemiBold" />
+          <TextBlock Text="{Binding ResidentRuntimeStatus}"
+                     TextWrapping="Wrap"
+                     FontFamily="Consolas,Courier New,monospace"
+                     FontSize="12" />
+          <Button Content="Проверить резидентный ввод"
+                  Command="{Binding RefreshResidentRuntimeStatusCommand}"
+                  HorizontalAlignment="Left" />
+        </StackPanel>
+      </Border>
+
+      <Border Classes="card">
+        <StackPanel Spacing="12">
+          <TextBlock Text="Подсказки при вводе (только метаданные)"
+                     FontWeight="SemiBold" />
+          <TextBlock Text="Ограниченный контекст в памяти и локальное предсказание следующего слова. Только счётчики статуса — контекст и текст подсказки не записываются, не сохраняются и не показываются."
+                     Opacity="0.75"
+                     TextWrapping="Wrap" />
+          <TextBlock Text="{Binding LivePredictionStatus}"
+                     TextWrapping="Wrap"
+                     FontFamily="Consolas,Courier New,monospace"
+                     FontSize="12" />
+          <Button Content="Обновить статус подсказок"
+                  Command="{Binding RefreshLivePredictionStatusCommand}"
+                  HorizontalAlignment="Left" />
+        </StackPanel>
+      </Border>
+
+      <Border Classes="card">
+        <StackPanel Spacing="12">
+          <TextBlock Text="Отмена последнего исправления"
+                     FontWeight="SemiBold" />
+          <TextBlock Text="Отменяет последнее успешное исправление раскладки или орфографии в активном приложении. Только счётчики статуса — текст слова никогда не записывается и не сохраняется."
+                     Opacity="0.75"
+                     TextWrapping="Wrap" />
+          <TextBlock Text="{Binding UndoStatus}"
+                     TextWrapping="Wrap"
+                     FontFamily="Consolas,Courier New,monospace"
+                     FontSize="12" />
+          <StackPanel Orientation="Horizontal" Spacing="8">
+            <Button Content="Отменить последнее исправление"
+                    Command="{Binding UndoLastCorrectionCommand}"
+                    IsEnabled="{Binding !IsUndoRunning}"
+                    HorizontalAlignment="Left" />
+            <Button Content="Обновить статус отмены"
+                    Command="{Binding RefreshUndoStatusCommand}"
+                    HorizontalAlignment="Left" />
+          </StackPanel>
+        </StackPanel>
+      </Border>
+
+      <Border Classes="card">
+        <StackPanel Spacing="12">
+          <TextBlock Text="Политика безопасности (только просмотр)"
+                     FontWeight="SemiBold" />
+          <TextBlock Text="Осторожная отказоустойчивая политика для автоматизации. Защищённые и неизвестные контексты блокируют автоматизацию. Настройте исключённые приложения на странице «Приложения»."
+                     Opacity="0.75"
+                     TextWrapping="Wrap" />
+          <TextBlock Text="{Binding SafetyPolicyStatus}"
+                     TextWrapping="Wrap"
+                     FontFamily="Consolas,Courier New,monospace"
+                     FontSize="12" />
+          <Button Content="Обновить текущую политику"
+                  Command="{Binding RefreshSafetyStatusCommand}"
+                  HorizontalAlignment="Left" />
+        </StackPanel>
+      </Border>
+
+      <Border Classes="card">
+        <StackPanel Spacing="12">
+          <TextBlock Text="Ручное исправление выделенного текста"
+                     FontWeight="SemiBold" />
+          <TextBlock Text="Только явные действия. Сначала выделите текст в обычном поле. Защищённые, неизвестные, исключённые и аварийные контексты блокируются; безопасный режим разрешает ручные исправления, но блокирует автоматические. Выделенный текст никогда не записывается и не сохраняется. Глобальные сочетания настраиваются на странице «Горячие клавиши»."
+                     Opacity="0.75"
+                     TextWrapping="Wrap" />
+          <TextBlock Text="Исправить раскладку"
+                     FontWeight="SemiBold" />
+          <StackPanel Orientation="Horizontal" Spacing="8">
+            <Button Content="Исправить раскладку EN → RU"
+                    Command="{Binding FixLayoutEnglishToRussianCommand}"
+                    IsEnabled="{Binding !IsManualCorrectionRunning}" />
+            <Button Content="Исправить раскладку RU → EN"
+                    Command="{Binding FixLayoutRussianToEnglishCommand}"
+                    IsEnabled="{Binding !IsManualCorrectionRunning}" />
+          </StackPanel>
+          <TextBlock Text="Исправить орфографию / текст"
+                     FontWeight="SemiBold" />
+          <StackPanel Orientation="Horizontal" Spacing="8">
+            <Button Content="Исправить орфографию"
+                    Command="{Binding FixSpellingCommand}"
+                    IsEnabled="{Binding !IsManualCorrectionRunning}" />
+            <Button Content="Исправить текст EN → RU"
+                    Command="{Binding FixTextEnglishToRussianCommand}"
+                    IsEnabled="{Binding !IsManualCorrectionRunning}" />
+            <Button Content="Исправить текст RU → EN"
+                    Command="{Binding FixTextRussianToEnglishCommand}"
+                    IsEnabled="{Binding !IsManualCorrectionRunning}" />
+          </StackPanel>
+          <TextBlock Text="{Binding ManualCorrectionStatus}"
+                     TextWrapping="Wrap"
+                     FontFamily="Consolas,Courier New,monospace"
+                     FontSize="12" />
+        </StackPanel>
+      </Border>
+
+      <Border Classes="card">
+        <StackPanel Spacing="12">
+          <TextBlock Text="Ручное преобразование раскладки RU ↔ EN"
+                     FontWeight="SemiBold" />
+          <TextBlock Text="Только соответствие физических клавиш. Автоматическое исправление на границе слова использует определение раскладки и политику безопасности."
+                     Opacity="0.75"
+                     TextWrapping="Wrap" />
+          <TextBlock Text="Тестовый ввод (только локальный предпросмотр)"
+                     FontWeight="SemiBold" />
+          <TextBox Text="{Binding LayoutTestInput}"
+                   Watermark="Введите тестовый текст, например ghbdtn" />
+          <StackPanel Orientation="Horizontal" Spacing="8">
+            <Button Content="Преобразовать EN → RU"
+                    Command="{Binding ConvertTestInputEnglishToRussianCommand}" />
+            <Button Content="Преобразовать RU → EN"
+                    Command="{Binding ConvertTestInputRussianToEnglishCommand}" />
+          </StackPanel>
+          <TextBox Text="{Binding LayoutTestOutput}"
+                   IsReadOnly="True"
+                   Watermark="Здесь появится результат" />
+          <TextBlock Text="Преобразование выделенного текста"
+                     FontWeight="SemiBold" />
+          <TextBlock Text="Выделите текст в обычном поле, затем запустите преобразование. Защищённые поля и поля пароля заблокированы. Нажатие кнопки переносит фокус из целевого приложения; для надёжной демонстрации используйте тестовое поле выше."
+                     Opacity="0.75"
+                     TextWrapping="Wrap" />
+          <StackPanel Orientation="Horizontal" Spacing="8">
+            <Button Content="Преобразовать выделение EN → RU"
+                  Command="{Binding ConvertSelectionEnglishToRussianCommand}"
+                    IsEnabled="{Binding !IsLayoutConversionRunning}" />
+            <Button Content="Преобразовать выделение RU → EN"
+                  Command="{Binding ConvertSelectionRussianToEnglishCommand}"
+                    IsEnabled="{Binding !IsLayoutConversionRunning}" />
+          </StackPanel>
+          <TextBlock Text="{Binding LayoutConversionStatus}"
+                     TextWrapping="Wrap" />
+        </StackPanel>
+      </Border>
+
+      <Border Classes="card">
+        <StackPanel Spacing="12">
+          <TextBlock Text="Демонстрация замены abc → xyz"
+                     FontWeight="SemiBold" />
+          <TextBlock Text="1. Установите фокус в обычное текстовое поле (Блокнот, Word, поле браузера).&#x0a;2. Введите abc и оставьте курсор сразу после c.&#x0a;3. Нажмите «Запустить демонстрацию». Smart Input трижды нажмёт Backspace, затем вставит xyz."
+                     Opacity="0.75"
+                     TextWrapping="Wrap" />
+          <TextBlock Text="{Binding ReplacementDemoStatus}"
+                     TextWrapping="Wrap" />
+          <Button Content="Запустить демонстрацию abc → xyz"
+                  Command="{Binding RunAbcToXyzDemoCommand}"
+                  IsEnabled="{Binding !IsReplacementDemoRunning}"
+                  HorizontalAlignment="Left" />
+        </StackPanel>
+      </Border>
+
+      <Border Classes="card">
+        <Grid ColumnDefinitions="*,Auto">
+          <StackPanel Grid.Column="0" Spacing="4">
+            <TextBlock Text="Наблюдение за вводом"
+                       FontWeight="SemiBold" />
+            <TextBlock Text="{Binding MonitoringStatusText}"
+                       TextWrapping="Wrap" />
+            <TextBlock Text="{Binding IsMonitoring, StringFormat=Наблюдение активно: {0}}"
+                       Opacity="0.7"
+                       FontSize="12" />
+          </StackPanel>
+          <Button Grid.Column="1"
+                  Content="Очистить"
+                  Command="{Binding ClearDiagnosticsCommand}"
+                  VerticalAlignment="Center" />
+        </Grid>
+      </Border>
+
+      <Border Classes="card">
+        <DockPanel MinHeight="280">
+          <TextBlock DockPanel.Dock="Top"
+                     Text="Последние диагностические события"
+                     FontWeight="SemiBold"
+                     Margin="0,0,0,12" />
+          <ListBox ItemsSource="{Binding DiagnosticEvents}"
+                   ScrollViewer.HorizontalScrollBarVisibility="Auto">
+            <ListBox.ItemTemplate>
+              <DataTemplate x:DataType="vm:InputDiagnosticEntryViewModel">
+                <TextBlock Text="{Binding Summary}"
+                           FontFamily="Consolas,Courier New,monospace"
+                           FontSize="12"
+                           TextWrapping="NoWrap" />
+              </DataTemplate>
+            </ListBox.ItemTemplate>
+          </ListBox>
+        </DockPanel>
+      </Border>
+    </StackPanel>
+  </ScrollViewer>
+</UserControl>

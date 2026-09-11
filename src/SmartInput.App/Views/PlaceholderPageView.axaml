@@ -1,0 +1,24 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:SmartInput.App.ViewModels"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             d:DesignWidth="900"
+             d:DesignHeight="600"
+             x:Class="SmartInput.App.Views.PlaceholderPageView"
+             x:DataType="vm:PlaceholderPageViewModel">
+  <StackPanel Spacing="12" VerticalAlignment="Top">
+    <TextBlock Text="{Binding Title}"
+               FontSize="28"
+               FontWeight="SemiBold" />
+    <TextBlock Text="{Binding Description}"
+               Opacity="0.75"
+               TextWrapping="Wrap" />
+    <Border Classes="card">
+      <TextBlock Text="Этот раздел будет реализован в одной из следующих версий."
+                 Opacity="0.7"
+                 TextWrapping="Wrap" />
+    </Border>
+  </StackPanel>
+</UserControl>

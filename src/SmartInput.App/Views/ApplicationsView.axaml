@@ -1,0 +1,77 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:SmartInput.App.ViewModels"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             d:DesignWidth="900"
+             d:DesignHeight="700"
+             x:Class="SmartInput.App.Views.ApplicationsView"
+             x:DataType="vm:ApplicationsViewModel">
+  <ScrollViewer>
+    <StackPanel Spacing="24" MaxWidth="960">
+      <StackPanel Spacing="8">
+        <TextBlock Text="Безопасность приложений"
+                   FontSize="28"
+                   FontWeight="SemiBold" />
+        <TextBlock Text="Обычно здесь ничего менять не нужно. Добавляйте приложение только если хотите полностью отключить в нём автоматические исправления."
+                   Opacity="0.75"
+                   TextWrapping="Wrap" />
+      </StackPanel>
+
+      <Border Classes="card">
+        <StackPanel Spacing="12">
+          <TextBlock Text="Не исправлять в этих приложениях"
+                     FontWeight="SemiBold" />
+          <TextBlock Text="Названия процессов без .exe. Например: notepad, chrome. Можно через запятую или с новой строки."
+                     Opacity="0.75"
+                     TextWrapping="Wrap" />
+          <TextBox Text="{Binding ExcludedApplicationsText}"
+                   AcceptsReturn="True"
+                   MinHeight="80"
+                   Watermark="например: bankapp, customtool" />
+          <TextBlock Text="{Binding ValidationMessage}"
+                     TextWrapping="Wrap"
+                     Foreground="{DynamicResource AppDangerBrush}"
+                     Opacity="0.85" />
+          <StackPanel Orientation="Horizontal" Spacing="8">
+            <Button Content="Сохранить исключения"
+                    Command="{Binding SaveExcludedApplicationsCommand}" />
+            <Button Content="Обновить состояние политики"
+                    Command="{Binding RefreshSafeModeStatusCommand}" />
+          </StackPanel>
+          <TextBlock Text="{Binding SafeModeStatus}"
+                     FontFamily="Consolas,Courier New,monospace"
+                     FontSize="12"
+                     TextWrapping="Wrap"
+                     Opacity="0.8" />
+        </StackPanel>
+      </Border>
+
+      <Border Classes="card">
+        <StackPanel Spacing="12">
+          <TextBlock Text="Встроенная защита"
+                     FontWeight="SemiBold" />
+          <TextBlock Text="Терминалы, игровые окна, песочницы и удалённый рабочий стол защищены автоматически. Cursor, VS Code, Codex и IDE не блокируются автоматически. URL, пути, кодовые токены и защищённые поля также не изменяются."
+                    Opacity="0.75"
+                    TextWrapping="Wrap" />
+          <Expander Header="Показать технические категории защиты"
+                    IsExpanded="False">
+            <ItemsControl ItemsSource="{Binding BuiltInSafeModeApplications}"
+                          Margin="0,8,0,0">
+              <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                  <TextBlock Text="{Binding, StringFormat=• {0}}"
+                             FontFamily="Consolas,Courier New,monospace"
+                             FontSize="12"
+                             Margin="0,2" />
+                </DataTemplate>
+              </ItemsControl.ItemTemplate>
+            </ItemsControl>
+          </Expander>
+        </StackPanel>
+      </Border>
+
+    </StackPanel>
+  </ScrollViewer>
+</UserControl>

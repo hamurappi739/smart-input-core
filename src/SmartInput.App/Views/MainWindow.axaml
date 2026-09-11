@@ -1,0 +1,118 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:SmartInput.App.ViewModels"
+        xmlns:nav="using:SmartInput.App.Navigation"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        d:DesignWidth="1100"
+        d:DesignHeight="720"
+        x:Class="SmartInput.App.Views.MainWindow"
+        x:DataType="vm:MainWindowViewModel"
+        Title="Smart Input"
+        Width="1100"
+        Height="720"
+        MinWidth="900"
+        MinHeight="600">
+
+  <Grid ColumnDefinitions="260,*" Background="{DynamicResource AppCanvasBrush}">
+    <Border Grid.Column="0"
+            Background="{DynamicResource AppSidebarBrush}"
+            BorderBrush="{DynamicResource AppBorderBrush}"
+            BorderThickness="0,0,1,0">
+      <DockPanel Margin="16">
+        <StackPanel DockPanel.Dock="Top" Spacing="5" Margin="0,4,0,20">
+          <StackPanel Orientation="Horizontal" Spacing="10">
+            <Border Width="36" Height="36"
+                    CornerRadius="11"
+                    ClipToBounds="True">
+              <Image Source="avares://SmartInput/Assets/smart-input-v2.png"
+                     Stretch="UniformToFill" />
+            </Border>
+            <StackPanel VerticalAlignment="Center" Spacing="1">
+              <TextBlock Text="Smart Input"
+                         FontSize="20"
+                         FontWeight="SemiBold" />
+              <TextBlock Text="Умный помощник для набора текста"
+                         Classes="muted"
+                         FontSize="12" />
+            </StackPanel>
+          </StackPanel>
+        </StackPanel>
+
+        <StackPanel DockPanel.Dock="Bottom" Spacing="12" Margin="0,16,0,4">
+          <Border Classes="card" Padding="12" CornerRadius="14">
+            <Grid ColumnDefinitions="*,Auto">
+              <StackPanel Spacing="2">
+                <TextBlock Text="Тёмная тема"
+                           FontWeight="SemiBold" />
+                <TextBlock Text="{Binding ThemeDescription}"
+                           Classes="muted"
+                           FontSize="11" />
+              </StackPanel>
+              <ToggleSwitch Grid.Column="1"
+                            IsChecked="{Binding IsDarkTheme}"
+                            Margin="10,0,0,0"
+                            AutomationProperties.Name="Включить тёмную тему"
+                            AutomationProperties.HelpText="Меняет только оформление Smart Input" />
+            </Grid>
+          </Border>
+
+          <TextBlock Text="Ваш текст остаётся на этом компьютере"
+                     Classes="muted"
+                     FontSize="12"
+                     TextWrapping="Wrap"
+                     Margin="8,0" />
+        </StackPanel>
+
+        <ListBox ItemsSource="{Binding NavigationItems}"
+                 SelectedItem="{Binding SelectedNavigationItem}"
+                 Background="Transparent"
+                 BorderThickness="0">
+          <ListBox.ItemTemplate>
+            <DataTemplate x:DataType="nav:NavigationItem">
+              <TextBlock Text="{Binding Title}"
+                         Margin="8,10"
+                         FontSize="14" />
+            </DataTemplate>
+          </ListBox.ItemTemplate>
+        </ListBox>
+      </DockPanel>
+    </Border>
+
+    <Border Grid.Column="1" Background="{DynamicResource AppCanvasBrush}" Padding="36,28">
+      <ContentControl Content="{Binding CurrentPage}" />
+    </Border>
+
+    <!-- A short, interruptible top-to-bottom wash makes the theme change
+         readable without affecting hit testing or the live input path. The
+         code-behind paints the previous theme here and clears rows by opacity. -->
+    <Grid x:Name="ThemeWashOverlay"
+          IsVisible="False"
+          IsHitTestVisible="False"
+          Panel.ZIndex="100">
+      <Grid.RowDefinitions>
+        <RowDefinition Height="*" />
+        <RowDefinition Height="*" />
+        <RowDefinition Height="*" />
+        <RowDefinition Height="*" />
+        <RowDefinition Height="*" />
+        <RowDefinition Height="*" />
+        <RowDefinition Height="*" />
+        <RowDefinition Height="*" />
+        <RowDefinition Height="*" />
+        <RowDefinition Height="*" />
+      </Grid.RowDefinitions>
+      <Border x:Name="ThemeWashRow0" Grid.Row="0" />
+      <Border x:Name="ThemeWashRow1" Grid.Row="1" />
+      <Border x:Name="ThemeWashRow2" Grid.Row="2" />
+      <Border x:Name="ThemeWashRow3" Grid.Row="3" />
+      <Border x:Name="ThemeWashRow4" Grid.Row="4" />
+      <Border x:Name="ThemeWashRow5" Grid.Row="5" />
+      <Border x:Name="ThemeWashRow6" Grid.Row="6" />
+      <Border x:Name="ThemeWashRow7" Grid.Row="7" />
+      <Border x:Name="ThemeWashRow8" Grid.Row="8" />
+      <Border x:Name="ThemeWashRow9" Grid.Row="9" />
+    </Grid>
+  </Grid>
+</Window>

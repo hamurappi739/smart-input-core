@@ -1,0 +1,61 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:SmartInput.App.ViewModels"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             d:DesignWidth="900"
+             d:DesignHeight="600"
+             x:Class="SmartInput.App.Views.PrivacyView"
+             x:DataType="vm:PrivacyViewModel">
+  <ScrollViewer>
+    <StackPanel Spacing="24" MaxWidth="960">
+      <StackPanel Spacing="8">
+        <TextBlock Text="Конфиденциальность"
+                   Classes="page-title" />
+        <TextBlock Text="{Binding PrivacyHeadline}"
+                   Classes="page-subtitle" />
+      </StackPanel>
+
+      <Border Classes="card soft-green">
+        <StackPanel Spacing="12">
+          <TextBlock Text="Сбор данных"
+                     Classes="card-title" />
+          <TextBlock Text="{Binding DataCollectionSummary}"
+                     Classes="muted" />
+        </StackPanel>
+      </Border>
+
+      <Border Classes="card">
+        <StackPanel Spacing="12">
+          <TextBlock Text="Диагностика"
+                     Classes="card-title" />
+          <TextBlock Text="{Binding DiagnosticsSummary}"
+                     Classes="muted" />
+          <TextBlock Text="Счётчики и метаданные событий клавиатуры доступны в разделе «Дополнительно». Текст токенов никогда не показывается."
+                     FontSize="12"
+                     Opacity="0.6"
+                     TextWrapping="Wrap" />
+        </StackPanel>
+      </Border>
+
+      <Border Classes="card">
+        <StackPanel Spacing="12">
+          <TextBlock Text="Обучение и словарь"
+                     Classes="card-title" />
+          <TextBlock Text="{Binding LearningSummary}"
+                     Classes="muted" />
+        </StackPanel>
+      </Border>
+
+      <Border Classes="card">
+        <StackPanel Spacing="8">
+          <TextBlock Text="Политика безопасности"
+                     Classes="card-title" />
+          <TextBlock Text="Поля с паролями всегда защищены. Экстренная пауза останавливает все автоматические действия сразу."
+                     Classes="muted" />
+        </StackPanel>
+      </Border>
+    </StackPanel>
+  </ScrollViewer>
+</UserControl>

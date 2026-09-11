@@ -1,0 +1,9 @@
+﻿Id	RequiredAssertion	Kind	OperationClusterCoverage	Status	Reason
+A01-A32	Apply positives (32)	MustApply	OperationClusterRegressionTests / nen Fact	Present	Parameterized + ControlledCorpus_NenLayoutAnchor
+C01-C03	Capitalized Apply (3)	MustApplyCapitalized	ControlledCorpus_MustApplyCapitalized	Present	Parameterized theory
+E01-E32	Exact known preserves (32)	MustPreserve	ControlledCorpus_MustPreserve	Present	Parameterized theory
+D01-D26	Double-letter preserves (26)	MustPreserve	ControlledCorpus_MustPreserve	Present	Parameterized theory
+L01-L06	Layout leak rejects (6)	MustNotLayoutLeak	ControlledCorpus_MustNotLayoutLeak	Present	Parameterized theory
+U01	vbyzq unknown-name vs combined anchor	MustNotApplyUnknown	MustCorrect + anchor override	Renamed	Evaluated as combined Apply→меняй (not unknown-name Apply)
+U02-U05	Unknown-name rejects (4)	MustNotApplyUnknown	ControlledCorpus_MustNotApplyUnknown	Present	Parameterized theory
+TOTAL	104 individual assertions	—	MandatoryRegressionCatalog + MandatoryRegressionRunner	Present	Counter = assertion rows, not test methods

@@ -1,0 +1,202 @@
+<Application xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="SmartInput.App.App"
+             xmlns:local="using:SmartInput.App"
+             RequestedThemeVariant="Light">
+
+  <Application.Resources>
+    <ResourceDictionary>
+      <ResourceDictionary.ThemeDictionaries>
+        <ResourceDictionary x:Key="Light">
+          <SolidColorBrush x:Key="AppCanvasBrush" Color="#F5F5F7" />
+          <SolidColorBrush x:Key="AppSurfaceBrush" Color="#FFFFFF" />
+          <SolidColorBrush x:Key="AppSidebarBrush" Color="#F2F2F7" />
+          <SolidColorBrush x:Key="AppTextBrush" Color="#1D1D1F" />
+          <SolidColorBrush x:Key="AppSecondaryTextBrush" Color="#6E6E73" />
+          <SolidColorBrush x:Key="AppBorderBrush" Color="#E5E5EA" />
+          <SolidColorBrush x:Key="AppBlueBrush" Color="#007AFF" />
+          <SolidColorBrush x:Key="AppBlueHoverBrush" Color="#006EE6" />
+          <SolidColorBrush x:Key="AppBlueTintBrush" Color="#EAF3FF" />
+          <SolidColorBrush x:Key="AppGreenTintBrush" Color="#EAF8EF" />
+          <SolidColorBrush x:Key="AppOrangeTintBrush" Color="#FFF4E5" />
+          <SolidColorBrush x:Key="AppHeroBorderBrush" Color="#C9E1FF" />
+          <SolidColorBrush x:Key="AppGreenBorderBrush" Color="#CDEBD7" />
+          <SolidColorBrush x:Key="AppOrangeBorderBrush" Color="#F5D5A4" />
+          <SolidColorBrush x:Key="AppInputBrush" Color="#FBFBFD" />
+          <SolidColorBrush x:Key="AppSuccessBrush" Color="#16733B" />
+          <SolidColorBrush x:Key="AppDangerBrush" Color="#B00020" />
+        </ResourceDictionary>
+
+        <ResourceDictionary x:Key="Dark">
+          <SolidColorBrush x:Key="AppCanvasBrush" Color="#111318" />
+          <SolidColorBrush x:Key="AppSurfaceBrush" Color="#1B1E25" />
+          <SolidColorBrush x:Key="AppSidebarBrush" Color="#171A20" />
+          <SolidColorBrush x:Key="AppTextBrush" Color="#F5F7FA" />
+          <SolidColorBrush x:Key="AppSecondaryTextBrush" Color="#ABB4C2" />
+          <SolidColorBrush x:Key="AppBorderBrush" Color="#343A47" />
+          <SolidColorBrush x:Key="AppBlueBrush" Color="#5EA8FF" />
+          <SolidColorBrush x:Key="AppBlueHoverBrush" Color="#87BEFF" />
+          <SolidColorBrush x:Key="AppBlueTintBrush" Color="#172B45" />
+          <SolidColorBrush x:Key="AppGreenTintBrush" Color="#132A20" />
+          <SolidColorBrush x:Key="AppOrangeTintBrush" Color="#302415" />
+          <SolidColorBrush x:Key="AppHeroBorderBrush" Color="#2E5D91" />
+          <SolidColorBrush x:Key="AppGreenBorderBrush" Color="#2A6847" />
+          <SolidColorBrush x:Key="AppOrangeBorderBrush" Color="#76552B" />
+          <SolidColorBrush x:Key="AppInputBrush" Color="#232833" />
+          <SolidColorBrush x:Key="AppSuccessBrush" Color="#73D69C" />
+          <SolidColorBrush x:Key="AppDangerBrush" Color="#FF8C9B" />
+        </ResourceDictionary>
+      </ResourceDictionary.ThemeDictionaries>
+    </ResourceDictionary>
+  </Application.Resources>
+
+  <Application.Styles>
+    <FluentTheme />
+
+    <!-- Theme changes animate only paint properties. Layout and input remain
+         synchronous, so a theme switch cannot stall the resident runtime. -->
+    <Style Selector="Border">
+      <Setter Property="Transitions">
+        <Transitions>
+          <BrushTransition Property="Background" Duration="0:0:0.20" />
+          <BrushTransition Property="BorderBrush" Duration="0:0:0.20" />
+        </Transitions>
+      </Setter>
+    </Style>
+
+    <Style Selector="TextBlock">
+      <Setter Property="Transitions">
+        <Transitions>
+          <BrushTransition Property="Foreground" Duration="0:0:0.20" />
+        </Transitions>
+      </Setter>
+    </Style>
+
+    <Style Selector="Button">
+      <Setter Property="Transitions">
+        <Transitions>
+          <BrushTransition Property="Background" Duration="0:0:0.20" />
+          <BrushTransition Property="Foreground" Duration="0:0:0.20" />
+          <BrushTransition Property="BorderBrush" Duration="0:0:0.20" />
+        </Transitions>
+      </Setter>
+    </Style>
+
+    <Style Selector="TextBox">
+      <Setter Property="Transitions">
+        <Transitions>
+          <BrushTransition Property="Background" Duration="0:0:0.20" />
+          <BrushTransition Property="BorderBrush" Duration="0:0:0.20" />
+        </Transitions>
+      </Setter>
+    </Style>
+
+    <Style Selector="Window">
+      <Setter Property="Background" Value="{DynamicResource AppCanvasBrush}" />
+      <Setter Property="FontFamily" Value="Segoe UI Variable,Segoe UI" />
+      <Setter Property="Foreground" Value="{DynamicResource AppTextBrush}" />
+    </Style>
+
+    <Style Selector="Border.card">
+      <Setter Property="Background" Value="{DynamicResource AppSurfaceBrush}" />
+      <Setter Property="BorderBrush" Value="{DynamicResource AppBorderBrush}" />
+      <Setter Property="BorderThickness" Value="1" />
+      <Setter Property="CornerRadius" Value="18" />
+      <Setter Property="Padding" Value="20" />
+    </Style>
+
+    <Style Selector="Border.card.hero">
+      <Setter Property="Background" Value="{DynamicResource AppBlueTintBrush}" />
+      <Setter Property="BorderBrush" Value="{DynamicResource AppHeroBorderBrush}" />
+    </Style>
+
+    <Style Selector="Border.card.soft-green">
+      <Setter Property="Background" Value="{DynamicResource AppGreenTintBrush}" />
+      <Setter Property="BorderBrush" Value="{DynamicResource AppGreenBorderBrush}" />
+    </Style>
+
+    <Style Selector="Border.card.soft-orange">
+      <Setter Property="Background" Value="{DynamicResource AppOrangeTintBrush}" />
+      <Setter Property="BorderBrush" Value="{DynamicResource AppOrangeBorderBrush}" />
+    </Style>
+
+    <Style Selector="TextBlock.page-title">
+      <Setter Property="FontSize" Value="30" />
+      <Setter Property="FontWeight" Value="SemiBold" />
+      <Setter Property="Foreground" Value="{DynamicResource AppTextBrush}" />
+    </Style>
+
+    <Style Selector="TextBlock.page-subtitle">
+      <Setter Property="FontSize" Value="15" />
+      <Setter Property="Foreground" Value="{DynamicResource AppSecondaryTextBrush}" />
+      <Setter Property="TextWrapping" Value="Wrap" />
+    </Style>
+
+    <Style Selector="TextBlock.card-title">
+      <Setter Property="FontSize" Value="17" />
+      <Setter Property="FontWeight" Value="SemiBold" />
+      <Setter Property="Foreground" Value="{DynamicResource AppTextBrush}" />
+    </Style>
+
+    <Style Selector="TextBlock.muted">
+      <Setter Property="Foreground" Value="{DynamicResource AppSecondaryTextBrush}" />
+      <Setter Property="TextWrapping" Value="Wrap" />
+    </Style>
+
+    <Style Selector="TextBlock.field-label">
+      <Setter Property="FontWeight" Value="SemiBold" />
+      <Setter Property="Foreground" Value="{DynamicResource AppTextBrush}" />
+    </Style>
+
+    <Style Selector="TextBlock.empty-state">
+      <Setter Property="Foreground" Value="{DynamicResource AppSecondaryTextBrush}" />
+      <Setter Property="FontStyle" Value="Italic" />
+      <Setter Property="TextWrapping" Value="Wrap" />
+    </Style>
+
+    <Style Selector="TextBlock.status-badge">
+      <Setter Property="FontWeight" Value="SemiBold" />
+      <Setter Property="Foreground" Value="{DynamicResource AppSuccessBrush}" />
+    </Style>
+
+    <Style Selector="ListBoxItem">
+      <Setter Property="CornerRadius" Value="10" />
+      <Setter Property="Margin" Value="0,2" />
+      <Setter Property="Padding" Value="4" />
+    </Style>
+
+    <Style Selector="ListBoxItem:selected">
+      <Setter Property="Background" Value="{DynamicResource AppBlueTintBrush}" />
+      <Setter Property="Foreground" Value="{DynamicResource AppBlueBrush}" />
+    </Style>
+
+    <Style Selector="Button">
+      <Setter Property="MinHeight" Value="34" />
+      <Setter Property="Padding" Value="16,7" />
+      <Setter Property="FontWeight" Value="SemiBold" />
+    </Style>
+
+    <Style Selector="Button.primary">
+      <Setter Property="Background" Value="{DynamicResource AppBlueBrush}" />
+      <Setter Property="Foreground" Value="White" />
+    </Style>
+
+    <Style Selector="Button.primary:pointerover">
+      <Setter Property="Background" Value="{DynamicResource AppBlueHoverBrush}" />
+    </Style>
+
+    <Style Selector="Button.danger">
+      <Setter Property="Foreground" Value="{DynamicResource AppDangerBrush}" />
+    </Style>
+
+    <Style Selector="TextBox">
+      <Setter Property="Background" Value="{DynamicResource AppInputBrush}" />
+      <Setter Property="BorderBrush" Value="{DynamicResource AppBorderBrush}" />
+      <Setter Property="Padding" Value="12,9" />
+    </Style>
+  </Application.Styles>
+
+  <Application.DataTemplates>
+    <local:ViewLocator />
+  </Application.DataTemplates>
+</Application>

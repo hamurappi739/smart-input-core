@@ -1,0 +1,149 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:SmartInput.App.ViewModels"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             d:DesignWidth="900"
+             d:DesignHeight="600"
+             x:Class="SmartInput.App.Views.HomeView"
+             x:DataType="vm:HomeViewModel">
+  <ScrollViewer>
+    <StackPanel Spacing="24" MaxWidth="960">
+      <StackPanel Spacing="8">
+        <TextBlock Text="Добро пожаловать"
+                   Classes="page-title" />
+        <TextBlock Text="Включите нужные функции — остальное Smart Input сделает локально и осторожно."
+                   Classes="page-subtitle" />
+      </StackPanel>
+
+      <Border Classes="card hero">
+        <StackPanel Spacing="12">
+          <Grid ColumnDefinitions="*,Auto">
+            <StackPanel Grid.Column="0" Spacing="4" Margin="0,0,16,0">
+              <TextBlock Text="Текущее состояние"
+                         Classes="status-badge" />
+              <TextBlock Text="{Binding SafetyHeadline}"
+                         FontSize="21"
+                         FontWeight="SemiBold" />
+              <TextBlock Text="{Binding SafetyDetail}"
+                         Classes="muted" />
+              <TextBlock Text="{Binding SafetyLevelLabel, StringFormat=Режим: {0}}"
+                         Classes="muted"
+                         FontSize="12" />
+            </StackPanel>
+            <Button Grid.Column="1"
+                    Content="Обновить"
+                    Command="{Binding RefreshSafetyStatusCommand}"
+                    VerticalAlignment="Top" />
+          </Grid>
+        </StackPanel>
+      </Border>
+
+      <Border Classes="card soft-green">
+        <StackPanel Spacing="14">
+          <StackPanel Spacing="4">
+            <TextBlock Text="Основные функции"
+                       Classes="card-title" />
+            <TextBlock Text="Защищённые поля, URL, пути и код Smart Input не меняет автоматически."
+                       Classes="muted" />
+          </StackPanel>
+
+          <Grid ColumnDefinitions="*,Auto" RowDefinitions="Auto,Auto,Auto,Auto">
+            <StackPanel Grid.Row="0" Spacing="2" Margin="0,0,16,12">
+              <TextBlock Text="Автоматические исправления"
+                         FontWeight="SemiBold" />
+              <TextBlock Text="Главный переключатель помощника"
+                         Classes="muted"
+                         FontSize="12" />
+            </StackPanel>
+            <ToggleSwitch Grid.Row="0"
+                          Grid.Column="1"
+                          IsChecked="{Binding IsProtectionEnabled}"
+                          OnContent="Вкл."
+                          OffContent="Выкл."
+                          Margin="0,0,0,12"
+                          AutomationProperties.Name="Включить автоматические исправления" />
+
+            <StackPanel Grid.Row="1" Spacing="2" Margin="0,0,16,12">
+              <TextBlock Text="Неверная раскладка"
+                         FontWeight="SemiBold" />
+              <TextBlock Text="Исправление после пробела или знака"
+                         Classes="muted"
+                         FontSize="12" />
+            </StackPanel>
+            <ToggleSwitch Grid.Row="1"
+                          Grid.Column="1"
+                          IsChecked="{Binding AutomaticLayoutEnabled}"
+                          OnContent="Вкл."
+                          OffContent="Выкл."
+                          Margin="0,0,0,12"
+                          AutomationProperties.Name="Исправлять неверную раскладку" />
+
+            <StackPanel Grid.Row="2" Spacing="2" Margin="0,0,16,0">
+              <TextBlock Text="Опечатки"
+                         FontWeight="SemiBold" />
+              <TextBlock Text="Менять только очевидные варианты"
+                         Classes="muted"
+                         FontSize="12" />
+            </StackPanel>
+            <ToggleSwitch Grid.Row="2"
+                          Grid.Column="1"
+                          IsChecked="{Binding AutocorrectEnabled}"
+                          OnContent="Вкл."
+                          OffContent="Выкл."
+                          AutomationProperties.Name="Исправлять опечатки" />
+
+            <StackPanel Grid.Row="3" Spacing="2">
+              <TextBlock Text="Шаблоны текста"
+                         FontWeight="SemiBold" />
+              <TextBlock Text="Подстановка ваших сокращений"
+                         Classes="muted"
+                         FontSize="12" />
+            </StackPanel>
+            <ToggleSwitch Grid.Row="3"
+                          Grid.Column="1"
+                          IsChecked="{Binding SnippetsEnabled}"
+                          OnContent="Вкл."
+                          OffContent="Выкл."
+                          AutomationProperties.Name="Включить шаблоны текста" />
+          </Grid>
+
+          <TextBlock Text="Русский ↔ English уже встроены — отдельная вкладка языков не нужна."
+                     Classes="muted"
+                     FontSize="12"
+                     TextWrapping="Wrap" />
+        </StackPanel>
+      </Border>
+
+      <Border Classes="card soft-orange">
+        <Grid ColumnDefinitions="*,Auto">
+          <StackPanel Grid.Column="0" Spacing="4" VerticalAlignment="Center" Margin="0,0,16,0">
+            <TextBlock Text="Экстренная пауза"
+                       Classes="card-title" />
+            <TextBlock Text="Временно остановить все автоматические действия."
+                       Classes="muted" />
+          </StackPanel>
+          <ToggleSwitch Grid.Column="1"
+                        IsChecked="{Binding EmergencyPauseEnabled}"
+                        OnContent="Пауза"
+                        OffContent="Активно"
+                        AutomationProperties.Name="Включить экстренную паузу"
+                        VerticalAlignment="Center" />
+        </Grid>
+      </Border>
+
+      <Border Classes="card">
+        <StackPanel Spacing="8">
+          <TextBlock Text="Что включено сейчас"
+                     Classes="card-title" />
+          <TextBlock Text="{Binding FeatureSummary}"
+                     Classes="muted" />
+          <TextBlock Text="Дополнительные параметры находятся в разделе «Дополнительно»."
+                     Classes="muted"
+                     FontSize="12" />
+        </StackPanel>
+      </Border>
+    </StackPanel>
+  </ScrollViewer>
+</UserControl>

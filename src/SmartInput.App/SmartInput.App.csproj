@@ -1,0 +1,78 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <Platforms>x64</Platforms>
+    <PlatformTarget>x64</PlatformTarget>
+    <RuntimeIdentifier>win-x64</RuntimeIdentifier>
+    <!-- Keep the resident helper on the workstation GC and prefer smaller
+         heaps. This is a memory hint, not an unsafe process hard limit. -->
+    <ServerGarbageCollection>false</ServerGarbageCollection>
+    <ConcurrentGarbageCollection>true</ConcurrentGarbageCollection>
+    <TieredCompilation>true</TieredCompilation>
+    <TieredPGO>true</TieredPGO>
+    <RootNamespace>SmartInput.App</RootNamespace>
+    <AssemblyName>SmartInput</AssemblyName>
+    <ApplicationIcon>Assets\smart-input-v2.ico</ApplicationIcon>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <RuntimeHostConfigurationOption Include="System.GC.ConserveMemory" Value="5" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Avalonia" Version="11.2.1" />
+    <PackageReference Include="Avalonia.Desktop" Version="11.2.1" />
+    <PackageReference Include="Avalonia.Themes.Fluent" Version="11.2.1" />
+    <PackageReference Include="Avalonia.Fonts.Inter" Version="11.2.1" />
+    <PackageReference Include="AvaloniaUI.DiagnosticsSupport" Version="2.2.3">
+      <IncludeAssets Condition="'$(Configuration)' != 'Debug'">None</IncludeAssets>
+      <PrivateAssets Condition="'$(Configuration)' != 'Debug'">All</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.2" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="10.0.11" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="10.0.11" />
+    <PackageReference Include="SymSpell" Version="6.7.3" />
+    <PackageReference Include="WeCantSpell.Hunspell" Version="7.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SmartInput.Core\SmartInput.Core.csproj" />
+    <ProjectReference Include="..\SmartInput.Infrastructure\SmartInput.Infrastructure.csproj" />
+    <ProjectReference Include="..\SmartInput.Runtime\SmartInput.Runtime.csproj" />
+    <ProjectReference Include="..\SmartInput.Platform.Abstractions\SmartInput.Platform.Abstractions.csproj" />
+    <ProjectReference Include="..\SmartInput.Platform.Windows\SmartInput.Platform.Windows.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <AvaloniaResource Include="Assets\smart-input-v2.png" />
+
+    <!-- Offline Hunspell packs copied beside the executable. -->
+    <Content Include="Dictionaries\Hunspell\en_US.aff" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" />
+    <Content Include="Dictionaries\Hunspell\en_US.dic" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" />
+    <Content Include="Dictionaries\Hunspell\ru_RU.aff" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" />
+    <Content Include="Dictionaries\Hunspell\ru_RU.dic" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" />
+    <Content Include="Dictionaries\Hunspell\en_US.sidict" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" />
+    <Content Include="Dictionaries\Hunspell\ru_RU.sidict" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" />
+    <Content Include="Dictionaries\Hunspell\NOTICE.txt" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" />
+  </ItemGroup>
+
+  <!-- Runtime coordinators are compiled once in SmartInput.Runtime so the
+       future resident hook host can use them without loading Avalonia. -->
+  <ItemGroup>
+    <Compile Remove="Services\IInputDiagnosticCoordinator.cs" />
+    <Compile Remove="Services\InputDiagnosticCoordinator.cs" />
+    <Compile Remove="Services\LiveLayoutCorrectionCoordinator.cs" />
+    <Compile Remove="Services\CorrectionNotificationCoordinator.cs" />
+    <Compile Remove="Services\LivePredictionCoordinator.cs" />
+    <Compile Remove="Services\LivePredictionOverlayCoordinator.cs" />
+    <Compile Remove="Services\LivePredictionTabAcceptanceCoordinator.cs" />
+    <Compile Remove="Services\LivePredictionEscDismissalCoordinator.cs" />
+    <Compile Remove="Services\AutomaticLayoutHotkeyCoordinator.cs" />
+    <Compile Remove="Services\UndoHotkeyCoordinator.cs" />
+    <Compile Remove="Services\DoubleShiftUndoCoordinator.cs" />
+    <Compile Remove="Services\ManualCorrectionHotkeyCoordinator.cs" />
+  </ItemGroup>
+
+</Project>

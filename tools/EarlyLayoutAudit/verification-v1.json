@@ -1,0 +1,36 @@
+{
+  "schema": 1,
+  "date": "2026-09-10",
+  "liveReplacement": false,
+  "realAppInputVerified": false,
+  "rawUserTextCollected": false,
+  "targetedRegression": {
+    "passed": 257,
+    "failed": 0,
+    "skipped": 0,
+    "newEarlyLayoutTestsIncluded": 46,
+    "filter": "FullyQualifiedName~EarlyLayoutTests|FullyQualifiedName~WrongLayoutDetectionTests|FullyQualifiedName~BoundaryOrderingTests|FullyQualifiedName~LiveLayoutBoundaryGateTests|FullyQualifiedName~JointCorrectionPipelineTests|FullyQualifiedName~CorrectionUndoTests|FullyQualifiedName~ProtectedToken"
+  },
+  "expandedRegression": {
+    "passed": 1432,
+    "failed": 0,
+    "skipped": 0,
+    "durationSecondsReported": 111,
+    "filter": "Category!=FullCorpusAudit&Category!=CorpusBaseline&Category!=FocusedCorrection&Category!=BruteForceOracleAgreement&Category!=SignatureIndexCompleteness&Category!=KeyboardStress",
+    "includesTargetedTests": true
+  },
+  "existingPerformanceBudgetTest": {
+    "isolatedPassed": 1,
+    "failedDuringConcurrentLargeCorpusRun": true,
+    "cause": "unconfirmed; resource contention suspected"
+  },
+  "releaseBuild": {
+    "target": "EarlyLayoutAudit with Core dependency",
+    "errors": 0,
+    "warnings": 0,
+    "residentHostDeployment": false
+  },
+  "fullCoreSuite": "not completed; large corpus runs interrupted",
+  "modelReport": "results-v1-final.json",
+  "modelManifest": "early-layout-v1.manifest.json"
+}

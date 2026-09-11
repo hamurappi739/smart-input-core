@@ -1,0 +1,36 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <ItemGroup>
+    <ProjectReference Include="..\SmartInput.Platform.Abstractions\SmartInput.Platform.Abstractions.csproj" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="10.0.11" />
+    <!-- MIT-licensed, bounded spelling candidate lookup. The adapter is feature-gated
+         and is not wired into the live pipeline until the comparison tests pass. -->
+    <PackageReference Include="SymSpell" Version="6.7.3" />
+    <PackageReference Include="WeCantSpell.Hunspell" Version="7.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <InternalsVisibleTo Include="SmartInput.Core.Tests" />
+    <InternalsVisibleTo Include="SmartInput.App" />
+    <InternalsVisibleTo Include="SmartInput.Runtime" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Dictionaries\Lexicons\en_50k.txt"
+                      LogicalName="SmartInput.Core.Dictionaries.Lexicons.en_50k.txt" />
+    <EmbeddedResource Include="Dictionaries\Lexicons\ru_50k.csv"
+                      LogicalName="SmartInput.Core.Dictionaries.Lexicons.ru_50k.csv" />
+    <EmbeddedResource Include="Dictionaries\Lexicons\ru_RU_forms.bloom"
+                      LogicalName="SmartInput.Core.Dictionaries.Lexicons.ru_RU_forms.bloom" />
+  </ItemGroup>
+
+</Project>

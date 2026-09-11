@@ -1,0 +1,78 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:SmartInput.App.ViewModels"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             d:DesignWidth="900"
+             d:DesignHeight="700"
+             x:Class="SmartInput.App.Views.PredictionPreviewView"
+             x:DataType="vm:PredictionPreviewViewModel">
+  <ScrollViewer>
+    <StackPanel Spacing="24" MaxWidth="960">
+      <StackPanel Spacing="8">
+        <TextBlock Text="Предпросмотр подсказок"
+                   FontSize="28"
+                   FontWeight="SemiBold" />
+        <TextBlock Text="Встроенный прототип серой подсказки следующего слова. Он не вставляет текст в другие приложения и не использует глобальный перехват клавиатуры."
+                   Opacity="0.75"
+                   TextWrapping="Wrap" />
+      </StackPanel>
+
+      <Border Classes="card">
+        <StackPanel Spacing="12">
+          <StackPanel Orientation="Horizontal" Spacing="8">
+            <Border Background="{DynamicResource ThemeAccentBrush}"
+                    CornerRadius="4"
+                    Padding="8,4">
+              <TextBlock Text="{Binding PreviewOnlyLabel}"
+                         FontWeight="SemiBold"
+                         Foreground="White" />
+            </Border>
+            <TextBlock Text="Tab принимает · Esc скрывает · ввод обновляет"
+                       Opacity="0.75"
+                       VerticalAlignment="Center" />
+          </StackPanel>
+
+          <ComboBox ItemsSource="{Binding ActiveLanguageOptions}"
+                    SelectedItem="{Binding SelectedLanguageOption}"
+                    HorizontalAlignment="Left"
+                    MinWidth="180" />
+
+          <TextBlock Text="{Binding PreviewStatus}"
+                     TextWrapping="Wrap"
+                     AutomationProperties.Name="Состояние предпросмотра подсказки" />
+
+          <Grid MinHeight="160">
+            <TextBlock x:Name="GhostOverlay"
+                       IsHitTestVisible="False"
+                       TextWrapping="Wrap"
+                       FontFamily="Segoe UI, Inter, Arial, sans-serif"
+                       FontSize="14"
+                       LineHeight="22"
+                       Padding="12,10" />
+            <TextBox x:Name="PreviewEditor"
+                     Text="{Binding PreviewText, Mode=TwoWay}"
+                     TextWrapping="Wrap"
+                     AcceptsReturn="True"
+                     MinHeight="160"
+                     Background="Transparent"
+                     FontFamily="Segoe UI, Inter, Arial, sans-serif"
+                     FontSize="14"
+                     Padding="12,10"
+                     Watermark="Попробуйте ввести: how are "
+                     KeyDown="PreviewEditor_OnKeyDown"
+                     PropertyChanged="PreviewEditor_OnPropertyChanged"
+                     AutomationProperties.Name="Поле предпросмотра подсказки"
+                     AutomationProperties.HelpText="Локальный предпросмотр подсказки. Tab принимает видимую подсказку, Escape скрывает её." />
+          </Grid>
+
+          <StackPanel Orientation="Horizontal" Spacing="8">
+            <Button Content="Обновить предпросмотр"
+                    Command="{Binding RefreshPreviewCommand}" />
+          </StackPanel>
+        </StackPanel>
+      </Border>
+    </StackPanel>
+  </ScrollViewer>
+</UserControl>

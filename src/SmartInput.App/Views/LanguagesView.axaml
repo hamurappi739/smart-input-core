@@ -1,0 +1,45 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:SmartInput.App.ViewModels"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             d:DesignWidth="900"
+             d:DesignHeight="600"
+             x:Class="SmartInput.App.Views.LanguagesView"
+             x:DataType="vm:LanguagesViewModel">
+  <ScrollViewer>
+    <StackPanel Spacing="24" MaxWidth="960">
+      <StackPanel Spacing="8">
+        <TextBlock Text="Языки"
+                   Classes="page-title" />
+        <TextBlock Text="{Binding ActiveLanguagesSummary}"
+                   Classes="page-subtitle" />
+      </StackPanel>
+
+      <Border Classes="card">
+        <StackPanel Spacing="16">
+          <TextBlock Text="Активные раскладки"
+                     Classes="card-title" />
+          <CheckBox Content="Английский"
+                    IsChecked="{Binding IsEnglishActive}"
+                    IsEnabled="False" />
+          <CheckBox Content="Русский"
+                    IsChecked="{Binding IsRussianActive}"
+                    IsEnabled="False" />
+          <TextBlock Text="Помощник умеет определять, когда слово напечатано не той из этих двух раскладок."
+                     Classes="muted" />
+        </StackPanel>
+      </Border>
+
+      <Border Classes="card">
+        <StackPanel Spacing="8">
+          <TextBlock Text="Другие языки появятся позже"
+                     Classes="card-title" />
+          <TextBlock Text="{Binding AvailabilityNote}"
+                     Classes="muted" />
+        </StackPanel>
+      </Border>
+    </StackPanel>
+  </ScrollViewer>
+</UserControl>

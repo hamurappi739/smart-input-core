@@ -1,0 +1,39 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Platforms>x64</Platforms>
+    <PlatformTarget>x64</PlatformTarget>
+    <RuntimeIdentifier>win-x64</RuntimeIdentifier>
+    <AssemblyName>SmartInput.ResidentHost</AssemblyName>
+    <ServerGarbageCollection>false</ServerGarbageCollection>
+    <ConcurrentGarbageCollection>true</ConcurrentGarbageCollection>
+    <TieredCompilation>true</TieredCompilation>
+    <TieredPGO>true</TieredPGO>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <RuntimeHostConfigurationOption Include="System.GC.ConserveMemory" Value="5" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="10.0.11" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SmartInput.Runtime\SmartInput.Runtime.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- The host needs the same offline dictionaries as the correction
+         runtime, but does not take a dependency on Avalonia. -->
+    <Content Include="..\SmartInput.App\Dictionaries\Hunspell\en_US.aff" Link="Dictionaries\Hunspell\en_US.aff" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="..\SmartInput.App\Dictionaries\Hunspell\en_US.dic" Link="Dictionaries\Hunspell\en_US.dic" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="..\SmartInput.App\Dictionaries\Hunspell\ru_RU.aff" Link="Dictionaries\Hunspell\ru_RU.aff" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="..\SmartInput.App\Dictionaries\Hunspell\ru_RU.dic" Link="Dictionaries\Hunspell\ru_RU.dic" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="..\SmartInput.App\Dictionaries\Hunspell\en_US.sidict" Link="Dictionaries\Hunspell\en_US.sidict" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="..\SmartInput.App\Dictionaries\Hunspell\ru_RU.sidict" Link="Dictionaries\Hunspell\ru_RU.sidict" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+</Project>

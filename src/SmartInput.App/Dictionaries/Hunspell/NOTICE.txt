@@ -1,0 +1,9 @@
+SmartInput offline Hunspell dictionaries
+
+The en_US and ru_RU dictionary/affix files are obtained from the
+LibreOffice dictionaries project:
+https://github.com/LibreOffice/dictionaries
+
+Please see the upstream repository and the licence files in the corresponding
+dictionary directories for the applicable licensing terms and attribution.
+SmartInput does not send typed text or dictionary queries over the network.

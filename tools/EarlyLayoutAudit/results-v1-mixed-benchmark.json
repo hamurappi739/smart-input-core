@@ -1,0 +1,221 @@
+{
+  "Schema": 1,
+  "LiveReplacement": false,
+  "RawTextLogged": false,
+  "TrainingWords": 77954,
+  "ValidationWords": 9197,
+  "TestWords": 9300,
+  "Split": "normalized-word-sha256-before-prefix-expansion; not lemma/disjoint-domain heldout",
+  "Weighting": "squared rank scores; not corpus occurrence counts",
+  "TrainingMilliseconds": 123.24,
+  "ModelTableBytes": 2901860,
+  "BinaryBytes": 2901872,
+  "ModelSha256": "16841FE4A755523B41D5CC4DE1C5703B3B1F3FEEEC734E3DFE486DB44DBC4160",
+  "RoundTrip": true,
+  "Calibration": [
+    {
+      "Margin": 1.5,
+      "EligibleWords": 8853,
+      "PrefixPositions": 39446,
+      "FalseSwitches": 0,
+      "RecoveredWords": 5966,
+      "MissedWords": 2887,
+      "FirstSwitchLengthCounts": [
+        0,
+        0,
+        0,
+        0,
+        5768,
+        151,
+        34,
+        5,
+        8,
+        0,
+        0
+      ]
+    },
+    {
+      "Margin": 2.5,
+      "EligibleWords": 8853,
+      "PrefixPositions": 39446,
+      "FalseSwitches": 0,
+      "RecoveredWords": 5527,
+      "MissedWords": 3326,
+      "FirstSwitchLengthCounts": [
+        0,
+        0,
+        0,
+        0,
+        5225,
+        212,
+        69,
+        14,
+        5,
+        2,
+        0
+      ]
+    },
+    {
+      "Margin": 3.5,
+      "EligibleWords": 8853,
+      "PrefixPositions": 39446,
+      "FalseSwitches": 0,
+      "RecoveredWords": 4745,
+      "MissedWords": 4108,
+      "FirstSwitchLengthCounts": [
+        0,
+        0,
+        0,
+        0,
+        4249,
+        332,
+        104,
+        46,
+        11,
+        3,
+        0
+      ]
+    },
+    {
+      "Margin": 4.5,
+      "EligibleWords": 8853,
+      "PrefixPositions": 39446,
+      "FalseSwitches": 0,
+      "RecoveredWords": 3454,
+      "MissedWords": 5399,
+      "FirstSwitchLengthCounts": [
+        0,
+        0,
+        0,
+        0,
+        3007,
+        280,
+        100,
+        37,
+        22,
+        5,
+        3
+      ]
+    },
+    {
+      "Margin": 5.5,
+      "EligibleWords": 8853,
+      "PrefixPositions": 39446,
+      "FalseSwitches": 0,
+      "RecoveredWords": 2083,
+      "MissedWords": 6770,
+      "FirstSwitchLengthCounts": [
+        0,
+        0,
+        0,
+        0,
+        1765,
+        208,
+        71,
+        19,
+        13,
+        4,
+        3
+      ]
+    },
+    {
+      "Margin": 7,
+      "EligibleWords": 8853,
+      "PrefixPositions": 39446,
+      "FalseSwitches": 0,
+      "RecoveredWords": 514,
+      "MissedWords": 8339,
+      "FirstSwitchLengthCounts": [
+        0,
+        0,
+        0,
+        0,
+        442,
+        55,
+        12,
+        4,
+        1,
+        0,
+        0
+      ]
+    }
+  ],
+  "SelectedMargin": 1.5,
+  "Test": {
+    "Margin": 1.5,
+    "EligibleWords": 8954,
+    "PrefixPositions": 40063,
+    "FalseSwitches": 0,
+    "RecoveredWords": 5975,
+    "MissedWords": 2979,
+    "FirstSwitchLengthCounts": [
+      0,
+      0,
+      0,
+      0,
+      5778,
+      153,
+      30,
+      8,
+      6,
+      0,
+      0
+    ]
+  },
+  "English": {
+    "Margin": 1.5,
+    "EligibleWords": 4354,
+    "PrefixPositions": 17699,
+    "FalseSwitches": 0,
+    "RecoveredWords": 3123,
+    "MissedWords": 1231,
+    "FirstSwitchLengthCounts": [
+      0,
+      0,
+      0,
+      0,
+      3032,
+      60,
+      23,
+      4,
+      4,
+      0,
+      0
+    ]
+  },
+  "Russian": {
+    "Margin": 1.5,
+    "EligibleWords": 4600,
+    "PrefixPositions": 22364,
+    "FalseSwitches": 0,
+    "RecoveredWords": 2852,
+    "MissedWords": 1748,
+    "FirstSwitchLengthCounts": [
+      0,
+      0,
+      0,
+      0,
+      2746,
+      93,
+      7,
+      4,
+      2,
+      0,
+      0
+    ]
+  },
+  "AdversarialFutureSuffix": {
+    "Cases": 5,
+    "FalseSwitches": 5
+  },
+  "Benchmark": {
+    "Calls": 100000,
+    "SyntheticPrefixes": 1024,
+    "AverageMicroseconds": 0.155456,
+    "P95Microseconds": 0.2,
+    "P99Microseconds": 0.3,
+    "MaxMicroseconds": 18,
+    "AllocatedBytesPerCall": 0
+  },
+  "LiveReady": false
+}
